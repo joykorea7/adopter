@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>adopter — 자영업자를 위한 홈페이지·홍보 파트너</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --accent:#FF5C35;
+  --accent-light:#fff1ee;
+  --accent-dark:#d93f1f;
+  --gray50:#f9f9f7;
+  --gray100:#f0eeeb;
+  --gray200:#e0ddd8;
+  --gray400:#a09d98;
+  --gray600:#6b6762;
+  --gray800:#2e2c2a;
+  --radius-sm:10px;
+  --radius-md:16px;
+  --radius-lg:24px;
+  --radius-xl:36px;
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md:0 8px 32px rgba(0,0,0,0.10);
+  --shadow-lg:0 20px 60px rgba(0,0,0,0.13);
+  --font-ko:'Noto Sans KR',sans-serif;
+  --font-en:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:var(--font-ko);background:var(--white);color:var(--black);overflow-x:hidden;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--gray100);}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
+
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:0 24px;
+  transition:all .35s cubic-bezier(.4,0,.2,1);
+}
+#nav.solid{
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(16px);
+  box-shadow:0 1px 0 var(--gray200);
+}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{font-family:var(--font-en);font-weight:700;font-size:22px;letter-spacing:-.5px;color:var(--black);text-decoration:none;}
+.nav-logo span{color:var(--accent);}
+.nav-cta{background:var(--accent);color:#fff;border:none;padding:10px 22px;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-ko);transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.nav-cta:hover{background:var(--accent-dark);transform:translateY(-1px);}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;
+  background:var(--black);
+  display:flex;align-items:center;
+  padding:100px 24px 60px;
+  position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,92,53,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,92,53,0.07) 1px,transparent 1px);
+  background-size:60px 60px;
+  animation:gridMove 20s linear infinite;
+}
+@keyframes gridMove{0%{background-position:0 0;}100%{background-position:60px 60px;}}
+.hero-glow{position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,92,53,0.18) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:center;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,92,53,0.15);border:1px solid rgba(255,92,53,0.3);border-radius:50px;padding:8px 18px;margin-bottom:28px;}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:blink 1.8s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero-badge span{color:var(--accent);font-size:13px;font-weight:600;}
+.hero-title{font-size:clamp(32px,5vw,54px);font-weight:900;color:#fff;line-height:1.18;letter-spacing:-.02em;margin-bottom:28px;}
+.hero-title em{color:var(--accent);font-style:normal;position:relative;}
+.hero-title em::after{content:'';position:absolute;left:0;bottom:-4px;width:100%;height:3px;background:var(--accent);border-radius:2px;}
+.hero-subs{display:flex;flex-direction:column;gap:12px;margin-bottom:40px;}
+.hero-sub{display:flex;align-items:flex-start;gap:10px;color:rgba(255,255,255,0.72);font-size:16px;line-height:1.6;}
+.hero-sub::before{content:'✓';color:var(--accent);font-weight:900;flex-shrink:0;margin-top:2px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-accent{background:var(--accent);color:#fff;border:none;padding:16px 32px;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--font-ko);transition:all .25s;display:inline-flex;align-items:center;gap:8px;text-decoration:none;box-shadow:0 8px 24px rgba(255,92,53,0.4);}
+.btn-accent:hover{background:var(--accent-dark);transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,92,53,0.5);}
+.btn-ghost-white{background:rgba(255,255,255,0.1);color:#fff;border:1.5px solid rgba(255,255,255,0.25);padding:15px 28px;border-radius:50px;font-size:16px;font-weight:600;cursor:pointer;font-family:var(--font-ko);transition:all .25s;display:inline-flex;align-items:center;gap:8px;text-decoration:none;}
+.btn-ghost-white:hover{background:rgba(255,255,255,0.18);}
+
+/* HERO CARD */
+.hero-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);padding:32px 28px;backdrop-filter:blur(12px);}
+.trust-numbers{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;}
+.trust-num{text-align:center;background:rgba(255,255,255,0.06);border-radius:var(--radius-md);padding:20px 12px;}
+.trust-num-val{font-family:var(--font-en);font-size:28px;font-weight:700;color:var(--accent);display:block;}
+.trust-num-label{font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px;display:block;}
+.hero-review{background:rgba(255,255,255,0.05);border-radius:var(--radius-sm);padding:16px;border-left:3px solid var(--accent);}
+.hero-review-text{color:rgba(255,255,255,0.85);font-size:14px;line-height:1.7;font-style:italic;}
+.hero-review-from{color:rgba(255,255,255,0.45);font-size:12px;margin-top:8px;}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,0.4);font-size:12px;animation:scrollBob 2s ease-in-out infinite;}
+@keyframes scrollBob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+.scroll-arrow{width:24px;height:24px;border-right:2px solid rgba(255,255,255,0.3);border-bottom:2px solid rgba(255,255,255,0.3);transform:rotate(45deg);margin-top:-6px;}
+
+/* ── PAIN ── */
+#pain{padding:96px 24px;background:var(--gray50);}
+.section-tag{display:inline-flex;align-items:center;gap:6px;background:var(--accent-light);color:var(--accent);border:1px solid rgba(255,92,53,0.2);padding:6px 16px;border-radius:50px;font-size:13px;font-weight:600;margin-bottom:16px;}
+.section-title{font-size:clamp(26px,4vw,40px);font-weight:900;color:var(--black);line-height:1.2;margin-bottom:12px;letter-spacing:-.02em;}
+.section-desc{color:var(--gray600);font-size:16px;line-height:1.7;margin-bottom:52px;}
+.container{max-width:1100px;margin:0 auto;}
+.section-head{text-align:center;margin-bottom:52px;}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:40px;}
+.pain-card{background:#fff;border-radius:var(--radius-lg);padding:32px 28px;border:1.5px solid var(--gray200);position:relative;overflow:hidden;transition:all .3s;}
+.pain-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--accent);}
+.pain-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.pain-card:hover::before{transform:scaleX(1);}
+.pain-emoji{font-size:36px;margin-bottom:16px;display:block;}
+.pain-title{font-size:18px;font-weight:800;color:var(--black);margin-bottom:10px;}
+.pain-desc{font-size:14px;color:var(--gray600);line-height:1.75;}
+.pain-banner{background:var(--black);border-radius:var(--radius-lg);padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.pain-banner-text{color:#fff;font-size:20px;font-weight:700;line-height:1.5;}
+.pain-banner-text span{color:var(--accent);}
+.pain-banner-badge{background:var(--accent);color:#fff;padding:12px 28px;border-radius:50px;font-weight:700;font-size:15px;white-space:nowrap;cursor:pointer;border:none;font-family:var(--font-ko);}
+
+/* ── SOLUTION ── */
+#solution{padding:96px 24px;background:#fff;}
+.solution-def{background:var(--gray50);border-radius:var(--radius-lg);padding:36px;margin-bottom:52px;border-left:4px solid var(--accent);}
+.solution-def-label{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;}
+.solution-def-text{font-size:18px;color:var(--black);line-height:1.75;font-weight:500;}
+.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.feat-card{background:var(--gray50);border-radius:var(--radius-lg);padding:32px 28px;position:relative;overflow:hidden;transition:all .3s;border:1.5px solid transparent;}
+.feat-card:hover{border-color:var(--accent);background:#fff;box-shadow:var(--shadow-md);transform:translateY(-4px);}
+.feat-num{font-family:var(--font-en);font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.1em;margin-bottom:14px;display:block;}
+.feat-icon{font-size:32px;margin-bottom:14px;display:block;}
+.feat-title{font-size:17px;font-weight:800;color:var(--black);margin-bottom:10px;}
+.feat-desc{font-size:14px;color:var(--gray600);line-height:1.75;}
+
+/* ── PRICING ── */
+#pricing{padding:96px 24px;background:var(--gray50);}
+.pricing-scroll{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.price-card{background:#fff;border-radius:var(--radius-lg);padding:32px 24px;border:1.5px solid var(--gray200);position:relative;transition:all .3s;display:flex;flex-direction:column;}
+.price-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.price-card.hot{background:var(--black);border-color:var(--black);}
+.price-card.hot .price-tier{color:rgba(255,255,255,0.6);}
+.price-card.hot .price-name{color:#fff;}
+.price-card.hot .price-main{color:var(--accent);}
+.price-card.hot .price-monthly{color:rgba(255,255,255,0.8);}
+.price-card.hot .price-monthly span{color:var(--accent);}
+.price-card.hot .price-feat{color:rgba(255,255,255,0.8);}
+.price-card.hot .price-feat .check{color:var(--accent);}
+.price-card.hot .price-note{color:rgba(255,255,255,0.4);}
+.price-card.hot .divider{background:rgba(255,255,255,0.1);}
+.hot-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:5px 16px;border-radius:50px;white-space:nowrap;}
+.price-tier{font-size:12px;font-weight:600;color:var(--gray400);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.price-name{font-size:20px;font-weight:900;color:var(--black);margin-bottom:20px;}
+.price-main{font-size:32px;font-weight:900;color:var(--black);line-height:1;}
+.price-main span{font-size:15px;font-weight:400;color:var(--gray400);}
+.price-monthly{font-size:14px;color:var(--gray600);margin-top:6px;margin-bottom:20px;}
+.price-monthly span{color:var(--accent);font-weight:700;}
+.divider{height:1px;background:var(--gray100);margin:16px 0;}
+.price-feats{display:flex;flex-direction:column;gap:10px;flex:1;}
+.price-feat{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--gray800);line-height:1.5;}
+.check{color:#22c55e;font-weight:900;flex-shrink:0;font-size:14px;}
+.no-check{color:var(--gray200);flex-shrink:0;font-size:14px;}
+.price-note{font-size:11px;color:var(--gray400);margin-top:12px;line-height:1.5;}
+.price-btn{margin-top:24px;width:100%;padding:14px;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;border:2px solid var(--accent);color:var(--accent);background:transparent;font-family:var(--font-ko);transition:all .25s;}
+.price-btn:hover{background:var(--accent);color:#fff;}
+.price-card.hot .price-btn{background:var(--accent);color:#fff;border-color:var(--accent);}
+.price-card.hot .price-btn:hover{background:var(--accent-dark);}
+.pricing-note{text-align:center;margin-top:28px;font-size:13px;color:var(--gray400);}
+
+/* ── PROCESS ── */
+#process{padding:96px 24px;background:var(--black);}
+.process-title{font-size:clamp(26px,4vw,40px);font-weight:900;color:#fff;text-align:center;margin-bottom:12px;}
+.process-sub{color:rgba(255,255,255,0.5);text-align:center;font-size:16px;margin-bottom:60px;}
+.steps{display:flex;align-items:flex-start;gap:0;justify-content:center;position:relative;}
+.steps::before{content:'';position:absolute;top:36px;left:calc(12.5% + 36px);right:calc(12.5% + 36px);height:2px;background:linear-gradient(90deg,var(--accent),rgba(255,92,53,0.3));z-index:0;}
+.step{flex:1;max-width:220px;text-align:center;position:relative;z-index:1;padding:0 12px;}
+.step-circle{width:72px;height:72px;border-radius:50%;background:rgba(255,92,53,0.15);border:2px solid rgba(255,92,53,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;transition:all .3s;}
+.step:hover .step-circle{background:var(--accent);border-color:var(--accent);transform:scale(1.1);}
+.step-num{font-family:var(--font-en);font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.1em;margin-bottom:8px;display:block;}
+.step-title{color:#fff;font-size:16px;font-weight:700;margin-bottom:8px;}
+.step-desc{color:rgba(255,255,255,0.5);font-size:13px;line-height:1.6;}
+
+/* ── SNS ── */
+#sns{padding:96px 24px;background:var(--white);}
+.sns-hero{
+  border-radius:var(--radius-xl);
+  background:linear-gradient(135deg,#0a0a0a 0%,#1a1a2e 50%,#0a0a0a 100%);
+  padding:56px 48px;
+  text-align:center;
+  margin-bottom:48px;
+  position:relative;
+  overflow:hidden;
+}
+.sns-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 50%,rgba(255,0,76,0.15),transparent 60%),
+             radial-gradient(ellipse at 70% 50%,rgba(255,92,53,0.12),transparent 60%);
+}
+.sns-hero-eyebrow{font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;position:relative;}
+.sns-hero-title{font-size:clamp(24px,3.5vw,38px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:16px;position:relative;}
+.sns-hero-title span{color:var(--accent);}
+.sns-hero-sub{font-size:16px;color:rgba(255,255,255,0.6);line-height:1.7;max-width:560px;margin:0 auto 32px;position:relative;}
+.sns-platforms{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;}
+.sns-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:50px;font-size:14px;font-weight:700;border:1.5px solid;}
+.sns-pill-yt{background:rgba(255,0,0,0.1);border-color:rgba(255,0,0,0.3);color:#ff4444;}
+.sns-pill-ig{background:rgba(225,48,108,0.1);border-color:rgba(225,48,108,0.3);color:#e1306c;}
+.sns-pill-tt{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.2);color:#fff;}
+.sns-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px;}
+.sns-card{border-radius:var(--radius-lg);padding:32px 26px;border:1.5px solid var(--gray200);background:#fff;transition:all .3s;position:relative;overflow:hidden;}
+.sns-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.sns-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);}
+.sns-card:hover::after{transform:scaleX(1);}
+.sns-card.yt::after{background:linear-gradient(90deg,#ff0000,#ff4444);}
+.sns-card.ig::after{background:linear-gradient(90deg,#833ab4,#fd1d1d,#fcb045);}
+.sns-card.tt::after{background:linear-gradient(90deg,#010101,#69c9d0,#ee1d52);}
+.sns-card:hover.yt{border-color:#ff4444;}
+.sns-card:hover.ig{border-color:#e1306c;}
+.sns-card:hover.tt{border-color:#69c9d0;}
+.sns-icon-wrap{width:52px;height:52px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:26px;}
+.yt .sns-icon-wrap{background:#fff0f0;}
+.ig .sns-icon-wrap{background:#fdf0f5;}
+.tt .sns-icon-wrap{background:#f0fffe;}
+.sns-platform-name{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;}
+.yt .sns-platform-name{color:#ff0000;}
+.ig .sns-platform-name{color:#c13584;}
+.tt .sns-platform-name{color:#010101;}
+.sns-card-title{font-size:17px;font-weight:800;color:var(--black);margin-bottom:10px;}
+.sns-card-desc{font-size:13.5px;color:var(--gray600);line-height:1.7;}
+.sns-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+.sns-tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:50px;background:var(--gray50);color:var(--gray600);border:1px solid var(--gray200);}
+.sns-flow{background:var(--gray50);border-radius:var(--radius-lg);padding:36px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+.sns-flow::before{content:'';position:absolute;top:50%;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--accent),rgba(255,92,53,0.2));transform:translateY(-50%);z-index:0;}
+.sns-flow-step{text-align:center;position:relative;z-index:1;padding:0 8px;}
+.sns-flow-circle{width:56px;height:56px;border-radius:50%;background:#fff;border:2px solid var(--gray200);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;box-shadow:var(--shadow-sm);}
+.sns-flow-step:first-child .sns-flow-circle{border-color:var(--accent);background:var(--accent-light);}
+.sns-flow-label{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:6px;font-family:var(--font-en);letter-spacing:.05em;}
+.sns-flow-title{font-size:14px;font-weight:700;color:var(--black);margin-bottom:4px;}
+.sns-flow-desc{font-size:12px;color:var(--gray600);line-height:1.5;}
+@media(max-width:900px){
+  .sns-grid{grid-template-columns:1fr;}
+  .sns-flow{grid-template-columns:1fr 1fr;gap:24px;}
+  .sns-flow::before{display:none;}
+  .sns-hero{padding:40px 24px;}
+}
+@media(max-width:600px){
+  .sns-flow{grid-template-columns:1fr;}
+}
+
+/* ── REVIEWS ── */
+#reviews{padding:96px 24px;background:var(--gray50);}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.review-card{background:#fff;border-radius:var(--radius-lg);padding:28px;border:1.5px solid var(--gray200);transition:all .3s;}
+.review-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--accent);}
+.review-stars{color:var(--accent);font-size:16px;margin-bottom:14px;letter-spacing:2px;}
+.review-text{font-size:15px;color:var(--gray800);line-height:1.8;margin-bottom:18px;font-style:italic;}
+.review-from{display:flex;align-items:center;gap:12px;}
+.review-avatar{width:40px;height:40px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.review-name{font-size:14px;font-weight:700;color:var(--black);}
+.review-biz{font-size:12px;color:var(--gray400);}
+
+/* ── FAQ ── */
+#faq{padding:96px 24px;background:#fff;}
+.faq-wrap{max-width:760px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--gray200);}
+.faq-btn{width:100%;background:none;border:none;text-align:left;padding:22px 0;font-family:var(--font-ko);font-size:16px;font-weight:600;color:var(--black);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.faq-btn:hover{color:var(--accent);}
+.faq-icon{width:28px;height:28px;border-radius:50%;background:var(--gray100);display:flex;align-items:center;justify-content:center;color:var(--gray600);font-size:18px;transition:all .3s;flex-shrink:0;font-style:normal;}
+.faq-btn:hover .faq-icon{background:var(--accent-light);color:var(--accent);}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-answer.open{max-height:300px;}
+.faq-answer p{padding:0 0 22px;font-size:15px;color:var(--gray600);line-height:1.8;}
+
+/* ── CONTACT ── */
+#contact{padding:96px 24px;background:var(--black);position:relative;overflow:hidden;}
+.contact-glow{position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(255,92,53,0.2) 0%,transparent 70%);pointer-events:none;}
+.contact-title{font-size:clamp(28px,4vw,44px);font-weight:900;color:#fff;text-align:center;margin-bottom:12px;position:relative;z-index:1;}
+.contact-sub{color:rgba(255,255,255,0.5);text-align:center;font-size:16px;margin-bottom:52px;position:relative;z-index:1;}
+.contact-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-xl);padding:44px 40px;max-width:680px;margin:0 auto;backdrop-filter:blur(12px);position:relative;z-index:1;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.form-label{font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);}
+.form-input{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:14px 18px;font-size:15px;color:#fff;font-family:var(--font-ko);outline:none;transition:all .2s;}
+.form-input::placeholder{color:rgba(255,255,255,0.3);}
+.form-input:focus{border-color:var(--accent);background:rgba(255,92,53,0.06);}
+textarea.form-input{resize:vertical;min-height:110px;}
+.plan-select{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px;}
+.plan-opt{text-align:center;padding:12px 8px;border-radius:var(--radius-sm);border:1.5px solid rgba(255,255,255,0.1);cursor:pointer;font-size:13px;color:rgba(255,255,255,0.6);transition:all .2s;font-weight:500;}
+.plan-opt:hover,.plan-opt.active{border-color:var(--accent);background:rgba(255,92,53,0.1);color:var(--accent);}
+.privacy-note{display:flex;gap:10px;background:rgba(255,255,255,0.04);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:20px;}
+.privacy-note p{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.6;}
+.submit-btn{width:100%;padding:18px;background:var(--accent);color:#fff;border:none;border-radius:50px;font-size:17px;font-weight:700;cursor:pointer;font-family:var(--font-ko);transition:all .3s;box-shadow:0 8px 24px rgba(255,92,53,0.4);}
+.submit-btn:hover{background:var(--accent-dark);transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,92,53,0.5);}
+.contact-channels{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+.ch-btn{flex:1;min-width:140px;padding:14px 18px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;text-decoration:none;border:1.5px solid;}
+.ch-phone{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8);}
+.ch-phone:hover{background:rgba(255,255,255,0.1);color:#fff;}
+.ch-kakao{background:rgba(254,229,0,0.1);border-color:rgba(254,229,0,0.3);color:#FEE500;}
+.ch-kakao:hover{background:rgba(254,229,0,0.15);}
+.hours-note{text-align:center;margin-top:28px;font-size:13px;color:rgba(255,255,255,0.35);position:relative;z-index:1;}
+
+/* THANKS */
+.thanks-card{text-align:center;padding:60px 40px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-xl);max-width:680px;margin:0 auto;position:relative;z-index:1;display:none;}
+.thanks-emoji{font-size:56px;margin-bottom:20px;}
+.thanks-title{font-size:24px;font-weight:900;color:#fff;margin-bottom:12px;}
+.thanks-desc{color:rgba(255,255,255,0.6);font-size:16px;line-height:1.8;margin-bottom:32px;}
+.thanks-channels{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+/* ── FOOTER ── */
+footer{background:#050505;padding:40px 24px;text-align:center;border-top:1px solid rgba(255,255,255,0.06);}
+.footer-logo{font-family:var(--font-en);font-weight:700;font-size:20px;color:#fff;margin-bottom:12px;}
+.footer-logo span{color:var(--accent);}
+footer p{font-size:13px;color:rgba(255,255,255,0.3);}
+footer .footer-sub{font-size:12px;margin-top:6px;}
+
+/* ── FLOATING ── */
+.float-wrap{position:fixed;bottom:24px;right:20px;z-index:999;display:flex;flex-direction:column;gap:10px;align-items:flex-end;}
+.float-btn{border:none;border-radius:50px;padding:13px 20px;font-family:var(--font-ko);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .3s;box-shadow:var(--shadow-md);text-decoration:none;}
+.float-kakao{background:#FEE500;color:#3A1D1D;}
+.float-kakao:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
+.float-call{background:var(--accent);color:#fff;}
+.float-call:hover{background:var(--accent-dark);transform:translateY(-2px);}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--black);color:#fff;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:600;opacity:0;transition:all .3s;z-index:9999;pointer-events:none;white-space:nowrap;border:1px solid rgba(255,255,255,0.1);}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── FADE IN ── */
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.fade-in-delay-1{transition-delay:.1s;}
+.fade-in-delay-2{transition-delay:.2s;}
+.fade-in-delay-3{transition-delay:.3s;}
+.fade-in-delay-4{transition-delay:.4s;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;}
+  .hero-card{max-width:480px;}
+  .pricing-scroll{grid-template-columns:1fr 1fr;}
+  .features-grid{grid-template-columns:1fr;}
+  .steps{flex-direction:column;align-items:center;gap:32px;}
+  .steps::before{display:none;}
+  .step{max-width:100%;}
+}
+@media(max-width:600px){
+  .hero-title{font-size:28px;}
+  .pricing-scroll{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .plan-select{grid-template-columns:repeat(2,1fr);}
+  .contact-card{padding:28px 20px;}
+  .trust-numbers{grid-template-columns:1fr 1fr;}
+  section{padding:64px 20px !important;}
+  .pain-banner{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">adopt<span>er</span></a>
+    <a class="nav-cta" href="#contact" onclick="goTo('contact');return false;">📞 무료 상담</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge fade-in">
+        <div class="hero-badge-dot"></div>
+        <span>지금 무료 상담 진행 중</span>
+      </div>
+      <h1 class="hero-title fade-in fade-in-delay-1">
+        사장님은 사업만 하세요,<br>
+        홈페이지·홍보·노출은<br>
+        <em>제가 하겠습니다.</em>
+      </h1>
+      <div class="hero-subs fade-in fade-in-delay-2">
+        <div class="hero-sub">홈페이지 제작, 비싸게 할 필요 없어요.</div>
+        <div class="hero-sub">만들기만 하는 게 아니라 검색에 보이게 세팅해 드려요.</div>
+        <div class="hero-sub">고객 응대도 자동으로 가능하게 세팅해 드려요.</div>
+        <div class="hero-sub">사진만 보내주시면 나머지는 저희가 다 합니다.</div>
+      </div>
+      <div class="hero-btns fade-in fade-in-delay-3">
+        <a class="btn-accent" href="#contact" onclick="goTo('contact');return false;">🎁 무료 상담 신청</a>
+        <a class="btn-ghost-white" href="#pricing" onclick="goTo('pricing');return false;">요금제 보기 →</a>
+      </div>
+    </div>
+    <div class="hero-card fade-in fade-in-delay-4">
+      <div class="trust-numbers">
+        <div class="trust-num">
+          <span class="trust-num-val">500+</span>
+          <span class="trust-num-label">누적 상담 건수</span>
+        </div>
+        <div class="trust-num">
+          <span class="trust-num-val">↑23%</span>
+          <span class="trust-num-label">평균 매출 증가</span>
+        </div>
+      </div>
+      <div class="hero-review">
+        <p class="hero-review-text">"홈페이지 만들고 나서 네이버 지도에 바로 잡히고, 전화가 확실히 늘었어요. 뭘 해야 할지 몰랐는데 다 알아서 해주시더라고요."</p>
+        <p class="hero-review-from">— 부산 해운대 갈비집 사장님</p>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>스크롤</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section id="pain">
+  <div class="container">
+    <div class="section-head fade-in">
+      <div class="section-tag">😓 혹시 이런 고민 있으신가요?</div>
+      <h2 class="section-title">사장님이 직접 다 하기엔<br>하루가 너무 짧습니다</h2>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card fade-in">
+        <span class="pain-emoji">⏰</span>
+        <h3 class="pain-title">홍보할 시간이 없어요</h3>
+        <p class="pain-desc">주방·홀·배달까지 하루가 모자라는데 SNS, 블로그까지요? 그러다 경쟁 가게만 검색 상위에 뜹니다.</p>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-1">
+        <span class="pain-emoji">💸</span>
+        <h3 class="pain-title">업체 견적은 너무 비싸요</h3>
+        <p class="pain-desc">홈페이지 제작 300만 원, 월 광고비 수십만 원. 소상공인 입장에선 엄두가 안 나죠. 효과도 불투명하고요.</p>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-2">
+        <span class="pain-emoji">🤯</span>
+        <h3 class="pain-title">IT·온라인은 너무 어려워요</h3>
+        <p class="pain-desc">네이버 플레이스, 구글 비즈니스, 인스타그램... 뭐가 뭔지 모르겠고 설정하다 포기한 적 있으시죠?</p>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-3">
+        <span class="pain-emoji">🗺️</span>
+        <h3 class="pain-title">지도앱에 우리 가게가 안 보여요</h3>
+        <p class="pain-desc">네이버·카카오·구글 지도에 등록도 안 돼 있으면 동네 손님도 찾아오지 못합니다. 지금 이 순간도 기회를 잃고 있어요.</p>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-1">
+        <span class="pain-emoji">📞</span>
+        <h3 class="pain-title">전화 응대가 너무 힘들어요</h3>
+        <p class="pain-desc">바쁜데 문의 전화 계속 받기도 힘들고, 놓친 전화는 손님이 경쟁 업체로 넘어갑니다.</p>
+      </div>
+      <div class="pain-card fade-in fade-in-delay-2">
+        <span class="pain-emoji">🔍</span>
+        <h3 class="pain-title">네이버에 노출이 안 돼요</h3>
+        <p class="pain-desc">홈페이지를 만들었는데 검색해도 안 나와요. 제작만 해서는 소용없고, 검색에 잡히게 세팅이 따로 필요합니다.</p>
+      </div>
+    </div>
+    <div class="pain-banner fade-in">
+      <div class="pain-banner-text">
+        adopter가 이 모든 문제를<br>
+        <span>말도 안 되는 금액으로 한 번에</span> 해결해 드립니다
+      </div>
+      <button class="pain-banner-badge" onclick="goTo('contact')">지금 바로 해결하기 →</button>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="container">
+    <div class="section-head fade-in">
+      <div class="section-tag">⚡ adopter가 하는 일</div>
+      <h2 class="section-title">이 모든 게 하나의 서비스에</h2>
+    </div>
+    <div class="solution-def fade-in">
+      <div class="solution-def-label">adopter 정의</div>
+      <div class="solution-def-text">실제 자영업과 사업을 직접 해본 경험을 바탕으로, <strong>지금 바로 효과 있는</strong> 홈페이지 제작과 홍보 세팅을 해드립니다. 이론이 아닌 현장에서 검증된 방법으로요.</div>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card fade-in">
+        <span class="feat-num">01 — 홈페이지</span>
+        <span class="feat-icon">🌐</span>
+        <h3 class="feat-title">홈페이지 제작 + 검색 세팅</h3>
+        <p class="feat-desc">만들기만 하는 게 아닙니다. 네이버·구글 검색에 실제로 잡히도록 SEO 세팅까지 한 번에 해드립니다.</p>
+      </div>
+      <div class="feat-card fade-in fade-in-delay-1">
+        <span class="feat-num">02 — 포털 등록</span>
+        <span class="feat-icon">🗺️</span>
+        <h3 class="feat-title">3대 포털·지도앱 완전 등록</h3>
+        <p class="feat-desc">네이버·카카오·구글 검색 및 지도앱에 우리 가게가 정확하게 노출되도록 등록부터 관리까지 해드립니다.</p>
+      </div>
+      <div class="feat-card fade-in fade-in-delay-2">
+        <span class="feat-num">03 — AI 자동 응대</span>
+        <span class="feat-icon">🤖</span>
+        <h3 class="feat-title">카카오 AI 상담 매니저</h3>
+        <p class="feat-desc">24시간 손님 문의를 AI가 자동 응대합니다. 예약, 메뉴, 위치 안내를 사장님 대신 척척 처리해요.</p>
+      </div>
+      <div class="feat-card fade-in fade-in-delay-3">
+        <span class="feat-num">04 — 비즈니스 폰</span>
+        <span class="feat-icon">📱</span>
+        <h3 class="feat-title">070 비즈니스 폰 세팅</h3>
+        <p class="feat-desc">PC에서도 받는 전화, 통화 녹음, 자동 문자 발송, 부재중 안내까지. 놓치는 전화 없이 전문적으로 운영할 수 있습니다.</p>
+      </div>
+      <div class="feat-card fade-in" style="grid-column:1/-1;background:linear-gradient(135deg,#0a0a0a,#1a1a2e);border-color:transparent;">
+        <span class="feat-num" style="color:#ff6b6b;">05 — SNS 채널</span>
+        <span class="feat-icon">🎬</span>
+        <h3 class="feat-title" style="color:#fff;">유튜브 · 인스타 · 틱톡 개설 &amp; 운영 세팅</h3>
+        <p class="feat-desc" style="color:rgba(255,255,255,0.6);">3대 SNS 채널 개설부터 프로필 세팅, 첫 콘텐츠 업로드까지 한 번에. 사장님은 사진·영상만 보내주시면 됩니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="section-head fade-in">
+      <h2 class="process-title">이렇게 진행됩니다</h2>
+      <p class="process-sub">상담부터 세팅 완료까지, 사장님이 할 일은 거의 없습니다</p>
+    </div>
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-circle">💬</div>
+        <span class="step-num">STEP 01</span>
+        <h3 class="step-title">무료 상담</h3>
+        <p class="step-desc">전화·카톡으로 가게 상황과 필요한 서비스를 파악합니다</p>
+      </div>
+      <div class="step fade-in fade-in-delay-1">
+        <div class="step-circle">📋</div>
+        <span class="step-num">STEP 02</span>
+        <h3 class="step-title">맞춤 플랜 제안</h3>
+        <p class="step-desc">업종·예산에 맞는 최적 패키지를 제안드립니다</p>
+      </div>
+      <div class="step fade-in fade-in-delay-2">
+        <div class="step-circle">📸</div>
+        <span class="step-num">STEP 03</span>
+        <h3 class="step-title">자료 전달</h3>
+        <p class="step-desc">사진·메뉴판·가게 정보만 보내주세요. 나머지는 저희가 합니다</p>
+      </div>
+      <div class="step fade-in fade-in-delay-3">
+        <div class="step-circle">🚀</div>
+        <span class="step-num">STEP 04</span>
+        <h3 class="step-title">세팅 완료</h3>
+        <p class="step-desc">홈페이지·포털·AI 상담까지 모두 완성! 바로 운영 시작</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SNS -->
+<section id="sns">
+  <div class="container">
+
+    <div class="sns-hero fade-in">
+      <div class="sns-hero-eyebrow">🎬 NEW — SNS 채널 운영 서비스</div>
+      <h2 class="sns-hero-title">유튜브 · 인스타 · 틱톡<br><span>사장님 가게를 영상으로 알립니다</span></h2>
+      <p class="sns-hero-sub">계정 개설부터 프로필 디자인, 첫 콘텐츠 업로드까지. 사진 한 장, 영상 한 클립만 보내주시면 나머지는 저희가 다 합니다.</p>
+      <div class="sns-platforms">
+        <div class="sns-pill sns-pill-yt">▶ YouTube</div>
+        <div class="sns-pill sns-pill-ig">◈ Instagram</div>
+        <div class="sns-pill sns-pill-tt">♪ TikTok</div>
+      </div>
+    </div>
+
+    <div class="sns-grid">
+      <div class="sns-card yt fade-in">
+        <div class="sns-icon-wrap">▶️</div>
+        <div class="sns-platform-name">YouTube</div>
+        <h3 class="sns-card-title">유튜브 채널 개설 &amp; 세팅</h3>
+        <p class="sns-card-desc">채널 개설, 채널 아트·프로필 디자인, 첫 영상 업로드 최적화(제목·태그·썸네일)까지. 검색에 잡히는 채널로 만들어 드립니다.</p>
+        <div class="sns-tags">
+          <span class="sns-tag">채널 개설</span>
+          <span class="sns-tag">썸네일 제작</span>
+          <span class="sns-tag">SEO 태그</span>
+          <span class="sns-tag">업로드 대행</span>
+        </div>
+      </div>
+      <div class="sns-card ig fade-in fade-in-delay-1">
+        <div class="sns-icon-wrap">📸</div>
+        <div class="sns-platform-name">Instagram</div>
+        <h3 class="sns-card-title">인스타그램 계정 개설 &amp; 세팅</h3>
+        <p class="sns-card-desc">비즈니스 계정 전환, 프로필 최적화, 하이라이트 구성, 릴스·피드 첫 게시물 업로드까지. 팔로워가 늘어나는 구조로 잡아드립니다.</p>
+        <div class="sns-tags">
+          <span class="sns-tag">비즈니스 전환</span>
+          <span class="sns-tag">릴스 업로드</span>
+          <span class="sns-tag">피드 디자인</span>
+          <span class="sns-tag">해시태그 세팅</span>
+        </div>
+      </div>
+      <div class="sns-card tt fade-in fade-in-delay-2">
+        <div class="sns-icon-wrap">🎵</div>
+        <div class="sns-platform-name">TikTok</div>
+        <h3 class="sns-card-title">틱톡 계정 개설 &amp; 세팅</h3>
+        <p class="sns-card-desc">틱톡 비즈니스 계정 개설, 프로필 세팅, 트렌드 음악 적용, 첫 영상 업로드 대행. 짧은 영상 하나로 수천 명에게 노출됩니다.</p>
+        <div class="sns-tags">
+          <span class="sns-tag">계정 개설</span>
+          <span class="sns-tag">트렌드 편집</span>
+          <span class="sns-tag">첫 영상 업로드</span>
+          <span class="sns-tag">알고리즘 세팅</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sns-flow fade-in">
+      <div class="sns-flow-step">
+        <div class="sns-flow-circle">📱</div>
+        <div class="sns-flow-label">STEP 01</div>
+        <div class="sns-flow-title">사진·영상 전달</div>
+        <div class="sns-flow-desc">카카오톡으로 가게 사진이나 짧은 영상 클립만 보내주세요</div>
+      </div>
+      <div class="sns-flow-step">
+        <div class="sns-flow-circle">✂️</div>
+        <div class="sns-flow-label">STEP 02</div>
+        <div class="sns-flow-title">콘텐츠 편집</div>
+        <div class="sns-flow-desc">트렌드에 맞게 자막·음악·편집을 완성합니다</div>
+      </div>
+      <div class="sns-flow-step">
+        <div class="sns-flow-circle">🚀</div>
+        <div class="sns-flow-label">STEP 03</div>
+        <div class="sns-flow-title">3채널 동시 업로드</div>
+        <div class="sns-flow-desc">유튜브·인스타·틱톡에 최적 포맷으로 동시 게시</div>
+      </div>
+      <div class="sns-flow-step">
+        <div class="sns-flow-circle">📈</div>
+        <div class="sns-flow-label">STEP 04</div>
+        <div class="sns-flow-title">성과 리포트</div>
+        <div class="sns-flow-desc">조회수·팔로워 현황을 월 1회 공유드립니다</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-head fade-in">
+      <div class="section-tag">💰 투명한 요금제</div>
+      <h2 class="section-title">숨은 비용 없이, 딱 필요한 만큼만</h2>
+      <p style="color:var(--gray600);font-size:15px;margin-top:8px;">쇼핑몰·펜션 등 추가 기능은 별도 상담</p>
+    </div>
+    <div class="pricing-scroll">
+
+      <!-- 실속형 -->
+      <div class="price-card fade-in">
+        <div class="price-tier">Starter</div>
+        <div class="price-name">실속형</div>
+        <div class="price-main">10<span>만원</span></div>
+        <div class="price-monthly">월 <span>3만원</span></div>
+        <div class="divider"></div>
+        <div class="price-feats">
+          <div class="price-feat"><span class="check">✓</span> 홈페이지 제작</div>
+          <div class="price-feat"><span class="check">✓</span> 3대 포털 등록</div>
+          <div class="price-feat"><span class="check">✓</span> 3대 지도앱 등록</div>
+          <div class="price-feat"><span class="no-check">—</span> 네이버 플레이스 세팅</div>
+          <div class="price-feat"><span class="no-check">—</span> 카카오 AI 상담 매니저</div>
+          <div class="price-feat"><span class="no-check">—</span> 070 비즈니스 폰</div>
+          <div class="price-feat"><span class="no-check">—</span> 인쇄물 제작</div>
+          <div class="price-feat"><span class="no-check">—</span> SNS 채널 개설</div>
+          <div class="price-feat"><span class="check">✓</span> 수정 월 1회</div>
+        </div>
+        <button class="price-btn" onclick="selectPlan('실속형')">이 플랜 시작하기</button>
+      </div>
+
+      <!-- 기본형 -->
+      <div class="price-card fade-in fade-in-delay-1">
+        <div class="price-tier">Basic</div>
+        <div class="price-name">기본형</div>
+        <div class="price-main">15<span>만원</span></div>
+        <div class="price-monthly">월 <span>5만원</span></div>
+        <div class="divider"></div>
+        <div class="price-feats">
+          <div class="price-feat"><span class="check">✓</span> 홈페이지 제작</div>
+          <div class="price-feat"><span class="check">✓</span> 3대 포털 등록</div>
+          <div class="price-feat"><span class="check">✓</span> 3대 지도앱 등록</div>
+          <div class="price-feat"><span class="check">✓</span> 네이버 플레이스 세팅</div>
+          <div class="price-feat"><span class="check">✓</span> 카카오 비즈니스 세팅</div>
+          <div class="price-feat"><span class="check">✓</span> 구글 비즈니스 세팅</div>
+          <div class="price-feat"><span class="no-check">—</span> 070 비즈니스 폰</div>
+          <div class="price-feat"><span class="no-check">—</span> 인쇄물 제작</div>
+          <div class="price-feat"><span class="no-check">—</span> SNS 채널 개설</div>
+          <div class="price-feat"><span class="check">✓</span> 수정 월 2회</div>
+        </div>
+        <button class="price-btn" onclick="selectPlan('기본형')">이 플랜 시작하기</button>
+      </div>
+
+      <!-- 고급형 -->
+      <div class="price-card hot fade-in fade-in-delay-2">
+        <div class="hot-badge">🔥 가장 인기</div>
+        <div class="price-tier">Pro</div>
+        <div class="price-name">고급형</div>
+        <div class="price-main">30<span>만원</span></div>
+        <div class="price-monthly">월 <span>10만원</span></div>
+        <div class="divider" style="background:rgba(255,255,255,0.08);"></div>
+        <div class="price-feats">
+          <div class="price-feat"><span class="check">✓</span> 홈페이지 제작</div>
+          <div class="price-feat"><span class="check">✓</span> 3대 포털 등록</div>
+          <div class="price-feat"><span class="check">✓</span> 3대 지도앱 등록</div>
+          <div class="price-feat"><span class="check">✓</span> 네이버 플레이스 세팅</div>
+          <div class="price-feat"><span class="check">✓</span> 카카오 AI 상담 매니저</div>
+          <div class="price-feat"><span class="check">✓</span> 구글 비즈니스 세팅</div>
+          <div class="price-feat"><span class="check">✓</span> 070 비즈니스 폰 세팅</div>
+          <div class="price-feat"><span class="no-check" style="color:rgba(255,255,255,0.15);">—</span> 인쇄물 제작</div>
+          <div class="price-feat"><span class="check">✓</span> SNS 3채널 개설 세팅</div>
+          <div class="price-feat"><span class="check">✓</span> 수정 월 4회</div>
+          <div class="price-note">* 070 기본요금 3,300원+이용료 별도</div>
+        </div>
+        <button class="price-btn" onclick="selectPlan('고급형')">이 플랜 시작하기</button>
+      </div>
+
+      <!-- 최고급형 -->
+      <div class="price-card fade-in fade-in-delay-3">
+        <div class="price-tier">Premium</div>
+        <div class="price-name">최고급형</div>
+        <div class="price-main">50<span>만원</span></div>
+        <div class="price-monthly">월 <span>20만원</span></div>
+        <div class="divider"></div>
+        <div class="price-feats">
+          <div class="price-feat"><span class="check">✓</span> 홈페이지 제작</div>
+          <div class="price-feat"><span class="check">✓</span> 3대 포털 등록</div>
+          <div class="price-feat"><span class="check">✓</span> 3대 지도앱 등록</div>
+          <div class="price-feat"><span class="check">✓</span> 네이버 플레이스 세팅</div>
+          <div class="price-feat"><span class="check">✓</span> 카카오 AI 상담 매니저</div>
+          <div class="price-feat"><span class="check">✓</span> 구글 비즈니스 세팅</div>
+          <div class="price-feat"><span class="check">✓</span> 070 비즈니스 폰 세팅</div>
+          <div class="price-feat"><span class="check">✓</span> 인쇄물 제작 월 1개</div>
+          <div class="price-feat"><span class="check">✓</span> SNS 3채널 개설 + 월 업로드 대행</div>
+          <div class="price-feat"><span class="check">✓</span> 수정 월 10회</div>
+          <div class="price-note">* 로고·명함·전단·메뉴·X배너 등 포함<br>* 070 기본요금 3,300원+이용료 별도<br>* SNS 업로드 월 4회 포함</div>
+        </div>
+        <button class="price-btn" onclick="selectPlan('최고급형')">이 플랜 시작하기</button>
+      </div>
+
+    </div>
+    <p class="pricing-note">모든 플랜은 최소 계약 기간 없음 · 월 단위 해지 가능 · 구축비 선결제</p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="container">
+    <div class="section-head fade-in">
+      <div class="section-tag">⭐ 진행 사례 · 리뷰</div>
+      <h2 class="section-title">실제 사장님들의 이야기</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"카카오 AI 상담봇 세팅하고 나서 밤에 오는 예약 문의를 제가 직접 안 받아도 돼요. 아침에 일어나면 예약이 잡혀 있어요."</p>
+        <div class="review-from">
+          <div class="review-avatar">🍖</div>
+          <div>
+            <div class="review-name">서울 마포 삼겹살집</div>
+            <div class="review-biz">고급형 이용 · 3개월째</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-in fade-in-delay-1">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"네이버 지도에 우리 가게가 드디어 떴어요. 동네 사람들이 '검색해서 왔다'고 하는 게 너무 신기하더라고요. 이게 이렇게 간단한 거였다니."</p>
+        <div class="review-from">
+          <div class="review-avatar">☕</div>
+          <div>
+            <div class="review-name">인천 부평 카페 사장님</div>
+            <div class="review-biz">기본형 이용 · 2개월째</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-in fade-in-delay-2">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"IT 완전 문외한인데 처음부터 끝까지 다 해주시더라고요. 제가 한 건 사진이랑 메뉴판 사진 찍어서 보낸 게 전부예요."</p>
+        <div class="review-from">
+          <div class="review-avatar">🍜</div>
+          <div>
+            <div class="review-name">부산 해운대 국수 가게</div>
+            <div class="review-biz">실속형 이용 · 1개월째</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-in fade-in-delay-3">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"틱톡이 뭔지도 몰랐는데 영상 올리고 나서 이틀 만에 조회수가 3만 개 넘었어요. 그날 저녁부터 가게 문의가 갑자기 늘어서 깜짝 놀랐습니다."</p>
+        <div class="review-from">
+          <div class="review-avatar">🍕</div>
+          <div>
+            <div class="review-name">대전 유성 피자 가게</div>
+            <div class="review-biz">최고급형 이용 · SNS 서비스</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head fade-in">
+      <div class="section-tag">❓ 자주 묻는 질문</div>
+      <h2 class="section-title">궁금한 점이 있으신가요?</h2>
+    </div>
+    <div class="faq-wrap fade-in">
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(0)">
+          <span>계약 기간, 해지, 환불은 어떻게 되나요?</span>
+          <span class="faq-icon" id="fi0">+</span>
+        </button>
+        <div class="faq-answer" id="fa0">
+          <p>최소 계약 기간은 없습니다. 월 단위로 언제든지 해지 가능합니다. 구축비(초기 제작비)는 서비스 시작 후 환불이 어렵지만, 월 관리비는 당월 기준으로 정산됩니다. 해지 신청은 카카오톡 또는 전화로 가능합니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(1)">
+          <span>성과가 안 나오면 어떻게 되나요?</span>
+          <span class="faq-icon" id="fi1">+</span>
+        </button>
+        <div class="faq-answer" id="fa1">
+          <p>포털 등록·지도 노출은 대부분 1~2주 내 효과가 나타납니다. 매월 간단한 성과 리포트를 공유드리고, 개선이 필요한 부분은 함께 조정합니다. 단, 광고비를 투입하지 않는 구조이므로 경쟁이 매우 치열한 업종은 시간이 더 필요할 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(2)">
+          <span>제가 직접 해야 할 일이 많은가요?</span>
+          <span class="faq-icon" id="fi2">+</span>
+        </button>
+        <div class="faq-answer" id="fa2">
+          <p>거의 없습니다. 처음에 가게 사진, 메뉴 정보, 영업시간 등 기본 자료만 보내주시면 나머지는 저희가 다 합니다. 이후에는 주 1회 10분 정도 확인만 해주시면 됩니다. 수정 요청도 카톡 한 줄이면 됩니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(3)">
+          <span>계정·권한·개인정보 보안은 안전한가요?</span>
+          <span class="faq-icon" id="fi3">+</span>
+        </button>
+        <div class="faq-answer" id="fa3">
+          <p>모든 계정은 사장님 명의로 생성되며 저희는 관리 권한만 임시로 부여받습니다. 서비스 종료 시 권한은 즉시 반환됩니다. 개인정보는 서비스 제공 목적 외 절대 사용하지 않으며, 별도 보안 서버에 암호화 보관됩니다.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(4)">
+          <span>고객 지원은 어떻게 받나요?</span>
+          <span class="faq-icon" id="fi4">+</span>
+        </button>
+        <div class="faq-answer" id="fa4">
+          <p>카카오톡 채널로 24시간 문의 가능합니다. 운영시간(평일 10:00~18:00) 내 문의는 1시간 이내, 그 외 시간은 다음 영업일 오전 중 답변드립니다. 긴급 사항은 전화(070-7954-1417)로 연락 주세요.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(5)">
+          <span>컴퓨터를 전혀 몰라도 가능한가요?</span>
+          <span class="faq-icon" id="fi5">+</span>
+        </button>
+        <div class="faq-answer" id="fa5">
+          <p>물론입니다! 스마트폰으로 카카오톡만 사용할 수 있으면 충분합니다. 모든 설명은 쉽게 해드리고, 어려운 건 저희가 대신 처리합니다. 60~70대 사장님들도 아무 문제 없이 잘 사용하고 계세요.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-glow"></div>
+  <div class="container">
+    <h2 class="contact-title fade-in">지금 바로 시작하세요</h2>
+    <p class="contact-sub fade-in">상담은 무료입니다. 부담 없이 연락 주세요 😊</p>
+
+    <div id="contact-form" class="contact-card fade-in">
+      <p style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:16px;">관심 있는 플랜을 선택해 주세요</p>
+      <div class="plan-select" style="grid-template-columns:repeat(3,1fr);">
+        <div class="plan-opt" id="plan-실속형" onclick="selectPlanUI('실속형')">실속형<br><span style="font-size:11px;opacity:.7;">10만원</span></div>
+        <div class="plan-opt" id="plan-기본형" onclick="selectPlanUI('기본형')">기본형<br><span style="font-size:11px;opacity:.7;">15만원</span></div>
+        <div class="plan-opt" id="plan-고급형" onclick="selectPlanUI('고급형')">고급형<br><span style="font-size:11px;opacity:.7;">30만원</span></div>
+        <div class="plan-opt" id="plan-최고급형" onclick="selectPlanUI('최고급형')">최고급형<br><span style="font-size:11px;opacity:.7;">50만원</span></div>
+        <div class="plan-opt" id="plan-SNS만" onclick="selectPlanUI('SNS만')" style="grid-column:span 2;">📱 SNS만 (유튜브·인스타·틱톡)<br><span style="font-size:11px;opacity:.7;">별도 상담</span></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">이름 *</label>
+          <input class="form-input" type="text" id="inp-name" placeholder="홍길동"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">연락처 *</label>
+          <input class="form-input" type="tel" id="inp-phone" placeholder="010-0000-0000"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">매장 종류</label>
+        <input class="form-input" type="text" id="inp-store" placeholder="예: 치킨집, 카페, 미용실…"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">문의사항</label>
+        <textarea class="form-input" id="inp-msg" placeholder="궁금한 점이나 현재 상황을 편하게 적어주세요."></textarea>
+      </div>
+      <div class="privacy-note">
+        <span style="font-size:18px;flex-shrink:0;">🔒</span>
+        <p>입력하신 정보는 상담 안내 목적으로만 사용되며 제3자에게 제공되지 않습니다.</p>
+      </div>
+      <button class="submit-btn" id="submit-btn" onclick="submitForm()">무료 상담 신청하기 →</button>
+      <div class="contact-channels">
+        <a href="tel:07079541417" class="ch-btn ch-phone">📞 070-7954-1417</a>
+        <a href="http://pf.kakao.com/_CxmTun/chat" target="_blank" rel="noopener" class="ch-btn ch-kakao">💬 카카오 채널 상담</a>
+      </div>
+    </div>
+
+    <div id="thanks-card" class="thanks-card">
+      <div class="thanks-emoji">🎉</div>
+      <h3 class="thanks-title">상담 신청 완료!</h3>
+      <p class="thanks-desc">영업일 기준 <strong style="color:#fff;">24시간 내</strong>에 연락드립니다.<br>급하시면 아래로 바로 연락 주세요!</p>
+      <div class="thanks-channels">
+        <a href="tel:07079541417" class="ch-btn ch-phone">📞 070-7954-1417</a>
+        <a href="http://pf.kakao.com/_CxmTun/chat" target="_blank" rel="noopener" class="ch-btn ch-kakao">💬 카카오 채널</a>
+      </div>
+    </div>
+  </div>
+  <p class="hours-note">평일 10:00 ~ 18:00 운영 · 카카오톡 24시간 문의 가능</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">adopt<span>er</span></div>
+  <p>© 2025 adopter. All rights reserved.</p>
+  <p class="footer-sub">대표번호: 070-7954-1417 | 카카오: pf.kakao.com/_CxmTun</p>
+</footer>
+
+<!-- FLOATING -->
+<div class="float-wrap">
+  <a href="http://pf.kakao.com/_CxmTun/chat" target="_blank" rel="noopener" class="float-btn float-kakao">💬 카카오 상담</a>
+  <a href="tel:07079541417" class="float-btn float-call">📞 전화 연결</a>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- ──────── SCRIPT ──────── -->
+<script>
+// NAV 스크롤
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('solid',window.scrollY>50);
+});
+
+// 스무스 스크롤
+function goTo(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});}
+
+// Intersection Observer (fade-in)
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// FAQ
+let openFaq=null;
+function toggleFaq(i){
+  if(openFaq===i){
+    document.getElementById('fa'+i).classList.remove('open');
+    document.getElementById('fi'+i).style.transform='rotate(0deg)';
+    openFaq=null;
+  }else{
+    if(openFaq!==null){
+      document.getElementById('fa'+openFaq).classList.remove('open');
+      document.getElementById('fi'+openFaq).style.transform='rotate(0deg)';
+    }
+    document.getElementById('fa'+i).classList.add('open');
+    document.getElementById('fi'+i).style.transform='rotate(45deg)';
+    openFaq=i;
+  }
+}
+
+// 플랜 선택
+let selectedPlan='';
+function selectPlanUI(plan){
+  document.querySelectorAll('.plan-opt').forEach(el=>el.classList.remove('active'));
+  document.getElementById('plan-'+plan)?.classList.add('active');
+  selectedPlan=plan;
+}
+function selectPlan(plan){
+  selectPlanUI(plan);
+  goTo('contact');
+}
+
+// 토스트
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// 구글 시트 제출
+// ⬇️ Apps Script 배포 후 아래 URL을 교체하세요
+const SCRIPT_URL='여기에_Apps_Script_웹앱_URL_붙여넣기';
+
+async function submitForm(){
+  const name=document.getElementById('inp-name').value.trim();
+  const phone=document.getElementById('inp-phone').value.trim();
+  const store=document.getElementById('inp-store').value.trim();
+  const msg=document.getElementById('inp-msg').value.trim();
+  if(!name){showToast('⚠️ 이름을 입력해주세요');return;}
+  if(!phone){showToast('⚠️ 연락처를 입력해주세요');return;}
+
+  const btn=document.getElementById('submit-btn');
+  btn.textContent='전송 중…';btn.disabled=true;btn.style.opacity='.7';
+
+  if(SCRIPT_URL==='여기에_Apps_Script_웹앱_URL_붙여넣기'){
+    // 테스트 모드
+    showThanks();return;
+  }
+
+  try{
+    await fetch(SCRIPT_URL,{
+      method:'POST',mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,phone,store,msg,plan:selectedPlan})
+    });
+    showThanks();
+  }catch(e){
+    btn.textContent='오류가 발생했습니다. 다시 시도해주세요';
+    btn.disabled=false;btn.style.opacity='1';
+    setTimeout(()=>{btn.textContent='무료 상담 신청하기 →';},3000);
+  }
+}
+
+function showThanks(){
+  document.getElementById('contact-form').style.display='none';
+  const t=document.getElementById('thanks-card');
+  t.style.display='block';
+  t.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+// 페이지 로드 애니메이션 (hero 즉시)
+document.querySelectorAll('#hero .fade-in').forEach((el,i)=>{
+  setTimeout(()=>el.classList.add('visible'),200+i*150);
+});
+</script>
+</body>
+</html>
